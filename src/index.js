@@ -7,8 +7,19 @@ const axios = require('axios')
 
 
 function NewlineText(props) {
-  const text = props.text;
-  return text.split('\n').map(str => <p>{str}</p>);
+  
+  return props.text.split('\n').slice(0, -1).map(str => {
+  	const color = str.charAt(1);
+
+	  if(color === "X") {
+	  	return (<p class="pred"> <span class="dotr"></span>{str.substring(3,str.length)}</p>);
+	  } else if (color === "-") {
+	  	return (<p class="pyellow"> <span class="doty"></span>{str.substring(3,str.length)}</p>);
+	  } else if (color === "+") {
+	  	return (<p class="pgreen"> <span class="dotg"></span>{str.substring(3,str.length)}</p>);
+	  }
+  	return (<p> {str}</p>)
+  });
 }
 
 
@@ -55,19 +66,19 @@ class UserRoster extends React.Component {
 		        var userStatus = ""
 
 		        if(Date.now() - editTimestamp > 5000) {
-		            userStatus = "🔴 Not connected (Timed out) -- "
+		            userStatus = "[X] Not connected (Timed out) -- "
 		            if(Date.now() - editTimestamp > 10000) {
-		              userStatus = "🔴 Not connected -- "
+		              userStatus = "[X] Not connected -- "
 		            }
 		        } else {
 		            if(online) {
 		              if(tabbedIn) {
-		                userStatus = "🟢 Ready -- "
+		                userStatus = "[+] Ready -- "
 		              } else {
-		                userStatus = "🟡 Tabbed out -- "
+		                userStatus = "[-] Tabbed out -- "
 		              }
 		            } else {
-		              userStatus = "🔴 Not connected -- "
+		              userStatus = "[X] Not connected -- "
 		            }
 		          }
 		        text = text + userStatus + user.username + "\n";
@@ -84,7 +95,6 @@ class UserRoster extends React.Component {
   }
 
   render() {
-
 
   	return (<div class="login-page">
 	  <p class="TitleText">CopBot Web Dashboard / Roster code {this.props.rosterid}</p>

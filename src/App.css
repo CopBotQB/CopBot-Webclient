@@ -19,6 +19,12 @@
 
 		  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 		}
+
+		.pred {color:#ffaaaa}
+		.pyellow {color:#ffffaa}
+		.pgreen {color:#aaffaa}
+
+
 		.form input {
 		  font-family: "Roboto", sans-serif;
 		  outline: 0;
@@ -35,6 +41,31 @@
 		  border-left-width: 3px;
 		  border-top-width: 3px;
 		}
+
+		.dotr {
+ 		 height: 10px;
+ 		 width: 10px;
+		  background-color: #ff0000;
+		  border-radius: 50%;
+		  display: inline-block;
+		}
+
+		.doty {
+ 		 height: 10px;
+ 		 width: 10px;
+		  background-color: #ffff00;
+		  border-radius: 50%;
+		  display: inline-block;
+		}
+
+		.dotg {
+ 		 height: 10px;
+ 		 width: 10px;
+		  background-color: #00ff00;
+		  border-radius: 50%;
+		  display: inline-block;
+		}
+
 
 		#inputfield {
 		  font-family: "Roboto", sans-serif;
