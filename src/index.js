@@ -93,4 +93,4 @@ class UserRoster extends React.Component {
 
 
 
-ReactDOM.render(<UserRoster rosterid="testroster" />, document.getElementById('root'));
+ReactDOM.render(<UserRoster rosterid="" />, document.getElementById('root'));
