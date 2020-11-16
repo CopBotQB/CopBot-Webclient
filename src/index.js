@@ -5,6 +5,13 @@ import './App.css';
 
 const axios = require('axios')
 
+
+function NewlineText(props) {
+  const text = props.text;
+  return text.split('\n').map(str => <p>{str}</p>);
+}
+
+
 class UserRoster extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +31,6 @@ class UserRoster extends React.Component {
 	setNewRID = () => {
 		document.getElementById('root')
 		this.setState({stateText: this.state.stateText, rid: this.inputRef.current.value})
-		console.log(this.inputRef.current)
 
 	}
 
@@ -64,7 +70,7 @@ class UserRoster extends React.Component {
 		              userStatus = "🔴 Not connected -- "
 		            }
 		          }
-		        text = userStatus + user.username + "\n";
+		        text = text + userStatus + user.username + "\n";
 	        
 	    	}
           
@@ -79,12 +85,13 @@ class UserRoster extends React.Component {
 
   render() {
 
+
   	return (<div class="login-page">
 	  <p class="TitleText">CopBot Web Dashboard / Roster code {this.props.rosterid}</p>
 	  <input ref={this.inputRef} type="text" id="inputfield" placeholder="Roster name"></input>
 	  <input type="button" id="loginbutton" value="Apply" onClick={this.setNewRID}></input>
 	  <div class="form">
-	  	{this.state.stateText}
+	  	<NewlineText text={this.state.stateText} />
 	  </div>
 	</div>);
   }
