@@ -5,13 +5,12 @@ import './App.css';
 
 const axios = require('axios')
 
+var offlineStateCounter = {};
 
 function Loader(props) {
 	if(props.visible) {
-		console.log("mstockm")
 		return (<div class="loadcontainer"><div class="loader"></div></div>)
 	} else {
-		console.log("nm")
 		return (<div class="loadcontainer"></div>)
 	}
 }
@@ -25,12 +24,27 @@ function NewlineText(props) {
   	const color = str.charAt(1);
 
 
+  	const rx = /{([^}]+)}/gi;
+  	var match = str.match(rx)[0];
+  	str = str.replace(rx, "");
+  	var matcharr = match.substring(1,match.length-1).split(":");
+  	match = matcharr[0];
+  	var token = matcharr[1];
+
+
+  	var time = ((Date.now() - parseInt(match))/1000).toFixed(1);
+
+
 	  if(color === "X") {
-	  	return (<p class="pred"> <span class="dotr"></span>{str.substring(3,str.length)}</p>);
+	  	 if(time > 300) {
+	  		return (<p class="pred large"> <span class="dotr"></span>{str.substring(3,str.length)} <p class="info-red">This client has disconnected. Restart the client to reconnect.</p></p>);
+	  	} else {
+	  		return (<p class="pred large"> <span class="dotr"></span>{str.substring(3,str.length)} <p class="info-red">No data recieved for {time} seconds</p></p>);
+	  	}
 	  } else if (color === "-") {
-	  	return (<p class="pyellow"> <span class="doty"></span>{str.substring(3,str.length)}</p>);
+	  	return (<p class="pyellow large"> <span class="doty"></span>{str.substring(3,str.length)} <p class="info-yellow">Tabbed out for {offlineStateCounter[token]} second(s).</p></p>);
 	  } else if (color === "+") {
-	  	return (<p class="pgreen"> <span class="dotg"></span>{str.substring(3,str.length)}</p>);
+	  	return (<p class="pgreen large"> <span class="dotg"></span>{str.substring(3,str.length)} <p class="info-green">Online and tabbed in!</p></p>);
 	  }
   	return (<p> {str}</p>)
   });
@@ -65,9 +79,11 @@ class UserRoster extends React.Component {
     axios.get('https://copbot-e0c62.firebaseio.com/.json')
     .then(res => {
       if(res.data != null) {
+      	console.log("online state recieved")
       	var text = "";
       	for(var i = 0; i < Object.keys(res.data).length; i++) {
-	        var entry = res.data[Object.keys(res.data)[i]];
+      		var token = Object.keys(res.data)[i]
+	        var entry = res.data[token];
 	        var rosterid = this.state.rid;
 			this.setState({curDataLoaded: rosterid})
 
@@ -82,22 +98,25 @@ class UserRoster extends React.Component {
 		        var userStatus = ""
 
 		        if(Date.now() - editTimestamp > 5000) {
-		            userStatus = "[X] Not connected (Timed out) -- "
-		            if(Date.now() - editTimestamp > 10000) {
-		              userStatus = "[X] Not connected -- "
-		            }
+		            userStatus = "[X] Not connected -- "
+		            offlineStateCounter[token] = 0;
 		        } else {
 		            if(online) {
 		              if(tabbedIn) {
 		                userStatus = "[+] Ready -- "
+		                offlineStateCounter[token] = 0;
 		              } else {
-		                userStatus = "[-] Tabbed out -- "
+		                userStatus = "[-] Tabbed out -- ";
+		                if(typeof offlineStateCounter[token] == "undefined")
+		                	offlineStateCounter[token] = 0;
+		                offlineStateCounter[token] = offlineStateCounter[token] + 1;
 		              }
 		            } else {
 		              userStatus = "[X] Not connected -- "
+		              offlineStateCounter[token] = 0;
 		            }
 		          }
-		        text = text + userStatus + user.username + "\n";
+		        text = text + userStatus + user.username + "{" + editTimestamp + ":" + token + "}\n";
 	        
 	    	}
           
@@ -119,6 +138,7 @@ class UserRoster extends React.Component {
 	  <div class="form">
 	  <NewlineText text={this.state.stateText} />
 	  <Loader visible={!this.state.goodDataLoaded ? 1 : 0} />
+
 	  </div>
 	</div>);
   }
