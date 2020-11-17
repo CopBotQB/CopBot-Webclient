@@ -9,7 +9,7 @@ var offlineStateCounter = {};
 
 function Loader(props) {
 	if(props.visible) {
-		return (<div class="loadcontainer"><div class="loader"></div></div>)
+		return (<div class="loadcontainer"><div class="loader"></div><p class="loadertext">Loading database entries...</p></div>)
 	} else {
 		return (<div class="loadcontainer"></div>)
 	}
@@ -133,7 +133,7 @@ class UserRoster extends React.Component {
 
   	return (<div class="login-page">
 
-	  <p class="TitleText">CopBot Web Dashboard / Roster / {this.state.rid}</p>
+	  <p class="TitleText">CopBot Web Dashboard / v1.0 / Roster / {this.state.rid}</p>
 	  <input ref={this.inputRef} type="text" id="inputfield" placeholder="Roster name"></input>
 	  <div class="form">
 	  <NewlineText text={this.state.stateText} />
