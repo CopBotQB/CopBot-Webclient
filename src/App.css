@@ -243,6 +243,25 @@
 		  margin: 120px 0 0 -150px;
 		}
 
+		.modal {
+		  width: 500px;
+		  background: #23272a;
+		  box-shadow: 
+		    -2rem 2rem 2rem rgba(black, 0.2);
+		  filter: blur(0);
+		  transform: scale(1);  
+		  opacity: 1;
+		  visibility: visible;
+		  min-height: 300px;
+		  margin: auto;
+		  margin-top: 100px;
+		  text-align: center;
+		  padding: 20px;
+		  font-size: 18px;
+		  color: white;
+
+		}
+
 		/* Safari */
 		@-webkit-keyframes spin {
 		  0% { -webkit-transform: rotate(0deg); }

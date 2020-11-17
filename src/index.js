@@ -6,6 +6,7 @@ import './App.css';
 const axios = require('axios')
 
 var offlineStateCounter = {};
+var appVersion = "1.0.0";
 
 function Loader(props) {
 	if(props.visible) {
@@ -14,6 +15,8 @@ function Loader(props) {
 		return (<div class="loadcontainer"></div>)
 	}
 }
+
+
 
 function NewlineText(props) {
 
@@ -50,11 +53,20 @@ function NewlineText(props) {
   });
 }
 
+class Modal extends React.Component {
+  render() {
+    if(this.props.show){
+    	return null;
+    }
+    return <div class="modal"><h1> New version </h1><br /><br />A new version of the webclient has been released. Please reload the page to proceed.<br />It may take some time for internal code to update.</div>;
+  }
+}
+
 
 class UserRoster extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {stateText: "", rid: "", goodDataLoaded:false, curDataLoaded:""}
+    this.state = {stateText: "", rid: "", goodDataLoaded:false, curDataLoaded:"", rightVersion:true}
     this.inputRef = React.createRef();
 
   }
@@ -71,11 +83,13 @@ class UserRoster extends React.Component {
 
 
 	setNewRID = () => {
-		document.getElementById('root')
-		this.setState({rid:this.inputRef.current.value, goodDataLoaded:this.inputRef.current.value === this.state.curDataLoaded})
+		if(this.inputRef.current != null)
+			this.setState({rid:this.inputRef.current.value, goodDataLoaded:this.inputRef.current.value === this.state.curDataLoaded})
 	}
 
+
   getOnlineState = () => {
+  	if(!this.state.rightVersion) {return;}
     axios.get('https://copbot-e0c62.firebaseio.com/.json')
     .then(res => {
       if(res.data != null) {
@@ -84,6 +98,12 @@ class UserRoster extends React.Component {
       	for(var i = 0; i < Object.keys(res.data).length; i++) {
       		var token = Object.keys(res.data)[i]
 	        var entry = res.data[token];
+
+      		if(token === "_internal") {
+      			this.setState({rightVersion:entry.webclient.version === appVersion})
+      			continue;
+      		}
+
 	        var rosterid = this.state.rid;
 			this.setState({curDataLoaded: rosterid})
 
@@ -131,18 +151,24 @@ class UserRoster extends React.Component {
 
   render() {
 
-  	return (<div class="login-page">
-
-	  <p class="TitleText">CopBot Web Dashboard / v1.0 / Roster / {this.state.rid}</p>
-	  <input ref={this.inputRef} type="text" id="inputfield" placeholder="Roster name"></input>
-	  <div class="form">
-	  <NewlineText text={this.state.stateText} />
-	  <Loader visible={!this.state.goodDataLoaded ? 1 : 0} />
-
-	  </div>
-	</div>);
+  	if(this.state.rightVersion === true) {
+	  	return (
+	  		<div class="login-page">
+		  	
+			  <p class="TitleText">CopBot Web Dashboard / v{appVersion} / Roster / {this.state.rid}</p>
+			  <input ref={this.inputRef} type="text" id="inputfield" placeholder="Roster name"></input>
+			  <div class="form">
+				  <NewlineText text={this.state.stateText} />
+				  <Loader visible={!this.state.goodDataLoaded ? 1 : 0} />
+			  </div>
+			</div>);
+  	} else {
+  		return <Modal show={this.state.rightVersion ? 1 : 0} />
+  	}
   }
 }
+
+
 
 
 
