@@ -9,20 +9,141 @@
 		  z-index: 1;
 		  background: #292c30;
   		  margin: auto;
-  		  margin-top: 15px;
+  		  
 
 		  color: #ffffff;
-		  padding: 5px;
+		  padding: 25px;
+		  width: 600px;
+		  min-height: 200px;
+		  font-weight: bold;
+		  text-align: center;
+
+		  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+		}
+
+		.formwide {
+		  position: relative;
+		  z-index: 1;
+		  background: #292c30;
+  		  
+
+		  color: #ffffff;
+		  padding: 25px;
 		  width: 98%;
-		  height: 100%;
+		  min-height: 400px;
 		  font-weight: bold;
 
 		  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 		}
 
+		.idcopy {
+			display: inline;
+			position: relative;
+			margin-left:25px;
+			cursor: copy;
+			background-color: #7289da;
+			color: #fff;
+			padding-top: 5px;
+			padding-bottom: 5px;
+			padding-left: 15px;
+			padding-right: 15px;
+
+		}
+
+		.settingButtonYes {
+		    font-family: "Roboto", sans-serif;
+		    text-transform: uppercase;
+		    outline: 0;
+		    background: #66aa66;
+		    width: 10%;
+		    border: 0;
+		    padding: 5px;
+		    color: #FFFFFF;
+		    font-size: 14px;
+			margin-right: 5px;
+			margin-left: 5px;
+			margin-bottom: 10px;
+		    cursor: pointer;
+		}
+
+		.settingButtonNo {
+		    font-family: "Roboto", sans-serif;
+		    text-transform: uppercase;
+		    outline: 0;
+		    background: #aa6666;
+		    width: 10%;
+		    border: 0;
+		    padding: 5px;
+		    color: #FFFFFF;
+		    font-size: 14px;
+			margin-right: 5px;
+			margin-left: 5px;
+			margin-bottom: 10px;
+
+		    cursor: pointer;
+		}
+
+		.entryVcenter {
+			position: relative;
+			bottom: 25%;
+			display: inline;
+		}
+
+		.loginbutton {
+		    font-family: "Roboto", sans-serif;
+		    text-transform: uppercase;
+		    outline: 0;
+		    background: #7289da;
+		    width: 50%;
+		    border: 0;
+		    padding: 15px;
+		    color: #FFFFFF;
+		    font-size: 14px;
+
+		    cursor: pointer;
+		}
+
+		.loginbuttoninline {
+		    font-family: "Roboto", sans-serif;
+		    text-transform: uppercase;
+		    outline: 0;
+		    background: #7289da;
+		    width: 50%;
+		    border: 0;
+		    padding: 15px;
+		    color: #FFFFFF;
+		    font-size: 14px;
+		    display: inline-block;
+		    margin-bottom: 30px;
+		    cursor: pointer;
+		}
+
+		.large {
+			height:70px;
+			width:600px;
+			font-size: 30px;
+			padding-top: 0px;
+			font-weight: bold;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			left:0%;
+		}
+
+		.dashlarge {
+			height:70px;
+			width:100%;
+			font-size: 30px;
+			padding-top: 0px;
+			font-weight: bold;
+			margin-top: 0px;
+			margin-bottom: 0px;
+			left:0%;
+		}
+
 		.pred {color:#ffaaaa}
 		.pyellow {color:#ffffaa}
 		.pgreen {color:#aaffaa}
+		.padm {color:#aaffff}
 
 
 		.form input {
@@ -48,7 +169,10 @@
 		  background-color: #ff0000;
 		  border-radius: 50%;
 		  display: inline-block;
+
 		}
+
+
 
 		.doty {
  		 height: 25px;
@@ -62,6 +186,14 @@
  		 height: 25px;
  		 width: 25px;
 		  background-color: #00ff00;
+		  border-radius: 50%;
+		  display: inline-block;
+		}
+
+		.dotadm {
+ 		 height: 25px;
+ 		 width: 25px;
+		  background-color: #00ffff;
 		  border-radius: 50%;
 		  display: inline-block;
 		}
@@ -130,15 +262,7 @@
 		  color: #EF3B3A;
 		}
 
-		.large {
-			height:70px;
-			font-size: 30px;
-			padding-left: 25px;
-			padding-top: 0px;
-			font-weight: bold;
-			margin-top: 0px;
-			margin-bottom: 0px;
-		}
+
 
 		.info-green {
 			background-color: rgba(175, 255, 175, 0.35);
@@ -146,6 +270,20 @@
 			margin-left: 50px;
 			border-width: 5px;
 			border-color: rgba(0, 255, 0, 1.0);
+			border-top: 0;
+			border-right: 0;
+			border-bottom: 0;
+			border-style: solid;
+			display: inline-block;
+			color: #ffffff;
+		}
+
+		.info-adm {
+			background-color: rgba(175, 255, 255, 0.35);
+			padding: 5px;
+			margin-left: 50px;
+			border-width: 5px;
+			border-color: rgba(0, 255, 255, 1.0);
 			border-top: 0;
 			border-right: 0;
 			border-bottom: 0;
@@ -182,19 +320,8 @@
 			color: #ffffff;
 		}
 
-		#loginbutton {
-		    font-family: "Roboto", sans-serif;
-		    text-transform: uppercase;
-		    outline: 0;
-		    background: #7289da;
-		    width: 100%;
-		    border: 0;
-		    padding: 15px;
-		    color: #FFFFFF;
-		    font-size: 14px;
-		    -webkit-transition: all 0.3 ease;
-		    transition: all 0.3 ease;
-		    cursor: pointer;
+		.inlineClass {
+			display: inline-block;
 		}
 
 		.TitleText {
@@ -262,6 +389,10 @@
 
 		}
 
+
+
+
+
 		/* Safari */
 		@-webkit-keyframes spin {
 		  0% { -webkit-transform: rotate(0deg); }
@@ -279,4 +410,5 @@
 		  -webkit-font-smoothing: antialiased;
 		  -moz-osx-font-smoothing: grayscale;     
 		  align-content: center; 
+		  color: white;
 		}
