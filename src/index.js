@@ -51,7 +51,7 @@ function UnauthedGoogleElement() {
         );
 }
 
-function getStuff(code) {
+function authenticateUser(code) {
 
       let data = 'client_id=' + discordApp.clientid + '&client_secret=' + discordApp.clientsecret + '&grant_type=authorization_code&code=' + code + '&redirect_uri=' + discordApp.redirecturl + '&scope=' + discordApp.scope;
       let headers = {
@@ -148,7 +148,7 @@ function RedirectTo(props) {
 	if(code == null) {
 		window.location.href = props.u;
 	} else {
-		getStuff(code);
+		authenticateUser(code);
 	}
 	return null;
 }
