@@ -564,32 +564,3 @@ class App extends React.Component {
 
 
 render(<App />, document.getElementById("root"));
-
-
-/*
-
-
-
-
-
-class Authenticator extends React.Component {
-
-
-}
-
-
-*/
-
-/*
-
-function Authenticator() {
-	return (<FirebaseAuthProvider firebase={firebase} {...config}>
-		  {
-		    // my app code
-		  }
-		</FirebaseAuthProvider>)
-}
-
-
-//ReactDOM.render(<UserRoster rosterid="" />, document.getElementById('root'));
-ReactDOM.render(<UserRoster rosterid="" />, document.getElementById('root'));*/
